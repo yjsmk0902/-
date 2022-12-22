@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{css/bootstrap.min.css}"
+          href="css/bootstrap.min.css" rel="stylesheet"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"/>
+    <script>
+        $(function () {
+            $('.dateRange').daterangepicker({
+                locale: {
+                    format: "YYYY-MM-DD",
+                    separator: "~",
+                    applyLabel: "확인",
+                    cancelLabel: "취소",
+                    fromLabel: "From",
+                    toLabel: "To",
+                    customRangeLabel: "Custom",
+                    weekLabel: "W",
+                    daysOfWeek: ["일", "월", "화", "수", "목", "금", "토"],
+                    monthNames: [
+                        "1월",
+                        "2월",
+                        "3월",
+                        "4월",
+                        "5월",
+                        "6월",
+                        "7월",
+                        "8월",
+                        "9월",
+                        "10월",
+                        "11월",
+                        "12월",
+                    ],
+                },
+                opens: 'left'
+            }, function (start, end, label) {
+                $('.startEndDate').val(start.format("YYYY-MM-DD") + '-' + end.format("YYYY-MM-DD"));
+                console.log(
+                    "A new date selection was made: " +
+                    start.format("YYYY/MM/DD") +
+                    " to " +
+                    end.format("YYYY/MM/DD")
+                );
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="container py-5" style="">
+    <header>
+        <form action="" th:action th:object="${showSearch}" method="get">
+            <div class="row">
+                <div class="col">
+                    <!--SearchType 선택 창-->
+                    <div class="btn-group col" role="group" aria-label="Basic radio toggle button group">
+                        <th:block th:each="type : ${SearchTypeCond}">
+                            <input type="radio" class="btn-check"
+                                   th:field="*{searchType}" th:value="${type.name()}">
+                            <label class="btn btn-outline-primary" th:for="${#ids.prev('searchType')}"
+                                   th:text="${type.description}">
+                            </label>
+                        </th:block>
+                    </div>
+                </div>
+
+                <!--검색 창-->
+                <div class="col">
+                    <input type="text" id="search" class="form-control"
+                           th:field="*{keyWord}"
+                           placeholder="검색어를 입력하세요."/>
+                </div>
+                <!--날짜 범위 선택 창-->
+                <div class="col">
+                    <input type="text" name="" value="" class="form-control dateRange"
+                           th:field="*{startEndDate}" readonly/>
+                </div>
+            </div>
+
+            <!--검색 버튼-->
+            <div class="row py-3">
+                <button class="btn btn-outline-primary align-items-center" type="submit">검색</button>
+            </div>
+
+        </form>
+    </header>
+
+    <!--공연 리스트-->
+    <main>
+        <div>
+            <ul class="list-group">
+                <th:block th:each="show : ${shows}">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <label th:text="${show.getShowName()}"> 공연 이름</label>
+                        <span class="badge bg-primary rounded-pill"
+                              th:text="${show.getDate()}">
+                            공연 날짜
+                        </span>
+                        <button class="badge bg-primary rounded-pill" type="submit">보러가기</button>
+
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+    </main>
+</div>
+</body>
+</html>
