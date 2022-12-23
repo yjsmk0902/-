@@ -5,6 +5,7 @@ import org.jdom2.JDOMException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import spring_study.concertInfo.api.ConcertAPI;
+import spring_study.concertInfo.domain.cond.cocert_search.ConcertSearchCond;
 import spring_study.concertInfo.domain.dto.ConcertResponseDTO;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class ConcertService {
     private final ConcertAPI concertAPI;
 
     @Transactional(readOnly = true)
-    public List<ConcertResponseDTO> findByKeywordAndDate(String stDate, String edDate, String keyword) throws IOException, JDOMException {
-        return concertAPI.requestConcert(stDate, edDate, keyword);
+    public List<ConcertResponseDTO> findByKeywordAndDate(ConcertSearchCond cond) throws IOException, JDOMException {
+        return concertAPI.requestConcert(cond.getStartEndDate(), cond.getName());
     }
 }

@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,21 @@ public class ConcertAPI {
     private final RestTemplate restTemplate;
     private final String SERVICE_KEY = "935d9414e551433598a19a622d2c0660";
     private final String API_URL = "http://kopis.or.kr/openApi/restful/pblprfr";
-    public List<ConcertResponseDTO> requestConcert(String stDate, String edDate, String keyword) throws IOException, JDOMException {
+    public List<ConcertResponseDTO> requestConcert(String startEndDate, String keyword)
+            throws IOException, JDOMException {
+        String stDate, edDate;
+        if (startEndDate != null) {
+            String[] date = startEndDate.replaceAll("-", "").split("~");
+            stDate = date[0];
+            edDate = date[1];
+        }else{
+            stDate = LocalDate.now().toString();
+            edDate = stDate;
+        }
+
+        log.info("stDate={}", stDate);
+        log.info("edDate={}", edDate);
+
         StringBuilder OpenConcertApi = new StringBuilder();
         OpenConcertApi
                 .append(API_URL)
