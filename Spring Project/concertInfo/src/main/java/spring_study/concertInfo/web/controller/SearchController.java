@@ -1,5 +1,6 @@
 package spring_study.concertInfo.web.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jdom2.JDOMException;
@@ -44,7 +45,24 @@ public class SearchController {
     @GetMapping
     public String concert(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch, Model model) throws IOException, JDOMException {
         List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch);
+
         model.addAttribute("concerts", result);
         return "concerts";
     }
+
+//    @GetMapping("/list")
+//    public String concertList(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch, Model model) throws IOException, JDOMException {
+//        List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch);
+//
+//        int nowPage = concertSearch.getPage() + 1;
+//        int startPage = Math.max(nowPage - 4, 1);
+//        int endPage = Math.min(nowPage + 9, concertSearch.getPageSize());
+//
+//        model.addAttribute("concerts", result);
+//        model.addAttribute("nowPage", nowPage);
+//        model.addAttribute("startPage", startPage);
+//        model.addAttribute("endPage", endPage);
+//
+//        return "concerts";
+//    }
 }

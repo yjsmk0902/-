@@ -18,8 +18,8 @@ import java.util.List;
 public class ConcertAPITestController {
     private final ConcertService concertService;
 
-    @GetMapping("/api/v1/concert/{keyword}")
-    public List<ConcertResponseDTO> get(@PathVariable String keyword) throws IOException, JDOMException {
-        return concertService.findByKeywordAndDate(new ConcertSearchCond(keyword, "2022/11/01-2023/01/01"));
-    }
+//    @GetMapping("/api/v1/concert/{keyword}")
+//    public List<ConcertResponseDTO> get(@PathVariable String keyword) throws IOException, JDOMException {
+//        return concertService.findByKeywordAndDate(new ConcertSearchCond(keyword, "2022/11/01-2023/01/01"));
+//    }
 }

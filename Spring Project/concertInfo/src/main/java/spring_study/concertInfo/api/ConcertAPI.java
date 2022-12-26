@@ -8,6 +8,7 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import spring_study.concertInfo.domain.cond.cocert_search.ConcertSearchCond;
 import spring_study.concertInfo.domain.dto.ConcertResponseDTO;
 
 import java.io.IOException;
@@ -25,11 +26,13 @@ public class ConcertAPI {
     private final RestTemplate restTemplate;
     private final String SERVICE_KEY = "935d9414e551433598a19a622d2c0660";
     private final String API_URL = "http://kopis.or.kr/openApi/restful/pblprfr";
-    public List<ConcertResponseDTO> requestConcert(String startEndDate, String keyword)
+    public List<ConcertResponseDTO> requestConcert(ConcertSearchCond cond)
             throws IOException, JDOMException {
+
         String stDate, edDate;
-        if (startEndDate != null) {
-            String[] date = startEndDate.replaceAll("-", "").split("~");
+        if (cond.getStartEndDate() != null) {
+            String[] date = cond.getStartEndDate()
+                    .replaceAll("-", "").split("~");
             stDate = date[0];
             edDate = date[1];
         }else{
@@ -46,9 +49,9 @@ public class ConcertAPI {
                 .append("?service=" + SERVICE_KEY)
                 .append("&stdate=" + stDate)
                 .append("&ddate=" + edDate)
-                .append("&cpage=1")
-                .append("&rows=10")
-                .append("&shprfnm=" + keyword);
+                .append("&cpage=" + cond.getNowPage())
+                .append("&rows=" + 10)
+                .append("&shprfnm=" + cond.getName());
 
         log.info("URL={}", OpenConcertApi.toString());
 

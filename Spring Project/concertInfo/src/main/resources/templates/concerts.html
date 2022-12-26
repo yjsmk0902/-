@@ -49,10 +49,10 @@
         });
     </script>
 </head>
-<body>
+<body style="overflow-y: auto">
 <div class="container py-5" style="">
     <header>
-        <form action="" th:action th:object="${concertSearch}" method="get">
+        <form action="" th:object="${concertSearch}" method="get">
 
             <div class="row py-1">
 
@@ -100,6 +100,7 @@
                 <input type="text" id="search" class="form-control"
                        th:field="*{name}"
                        placeholder="검색어를 입력하세요."/>
+                <input th:field="*{nowPage}" hidden="hidden"/>
             </div>
 
             <!--날짜 범위 선택 창-->
@@ -115,24 +116,49 @@
 
         </form>
     </header>
+
     <!--공연 리스트-->
     <main>
-        <div>
+        <div style="overflow-y: auto; height: 1000px">
             <ul class="list-group">
                 <th:block th:each="concert : ${concerts}">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <label th:text="${concert.getTitle()}"> 공연 이름</label>
-                        <span class="badge bg-primary rounded-pill"
-                              th:text="|${concert.getStDate()}   -   ${concert.getEdDate}|">
-                            공연 날짜
-                        </span>
-                        <button class="badge bg-primary rounded-pill" type="submit">보러가기</button>
+                        <label class="" th:text="${concert.getTitle()}"> 공연 이름</label>
 
+                        <div class="row py-1">
+                            <div class="col py-1">
+                                <span class="badge bg-primary rounded-pill py-1"
+                                      th:text="${concert.getPlace()}">
+                                    공연 장소
+                                </span>
+                            </div>
+                            <div class="col py-1">
+                                <span class="badge bg-primary rounded-pill py-1"
+                                      th:text="|${concert.getStDate()}   -   ${concert.getEdDate}|">
+                                    공연 날짜
+                                </span>
+                            </div>
+
+                            <div class="col py-1">
+                                <button class="badge bg-primary rounded-pill py-1" type="submit">보러가기</button>
+                            </div>
+                        </div>
                     </li>
                 </th:block>
             </ul>
+            <div>
+                <div class="row py-1">
+                    <button class="btn btn-outline-primary align-items-center" type="submit">이전 페이지</button>
+                </div>
+                <div class="row py-1">
+                    <button class="btn btn-outline-primary align-items-center" type="submit">다음 페이지</button>
+                </div>
+            </div>
         </div>
     </main>
+
+
+
 </div>
 </body>
 </html>
