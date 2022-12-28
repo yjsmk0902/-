@@ -2,8 +2,6 @@ package spring_study.concertInfo.web.service;
 
 import lombok.RequiredArgsConstructor;
 import org.jdom2.JDOMException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import spring_study.concertInfo.api.ConcertAPI;
@@ -19,7 +17,7 @@ public class ConcertService {
     private final ConcertAPI concertAPI;
 
     @Transactional(readOnly = true)
-    public List<ConcertResponseDTO> findByKeywordAndDate(ConcertSearchCond cond) throws IOException, JDOMException {
-        return concertAPI.requestConcert(cond);
+    public List<ConcertResponseDTO> findByKeywordAndDate(ConcertSearchCond cond, int page) throws IOException, JDOMException {
+        return concertAPI.requestConcert(cond, page);
     }
 }

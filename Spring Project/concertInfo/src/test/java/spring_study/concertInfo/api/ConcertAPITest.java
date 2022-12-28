@@ -24,7 +24,7 @@ class ConcertAPITest {
     @Test
     public void paging() throws IOException, JDOMException {
         List<ConcertResponseDTO> list = concertAPI.requestConcert(
-                new ConcertSearchCond("", "2022-01-01~2023-01-01"));;
+                new ConcertSearchCond("", "2022-01-01~2023-01-01"), 1);;
 
         for (ConcertResponseDTO responseDTO : list) {
             System.out.println("responseDTO = " + responseDTO);

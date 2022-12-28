@@ -13,12 +13,9 @@ public class ConcertSearchCond {
 
     private String startEndDate;
 
-    private int nowPage = 1;
 
-    public ConcertSearchCond(String name, String startEndDate, int nowPage) {
+    public ConcertSearchCond(String name, String startEndDate) {
         this.name = name;
         this.startEndDate = startEndDate;
-        this.nowPage = nowPage;
     }
-
 }

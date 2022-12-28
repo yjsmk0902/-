@@ -6,9 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jdom2.JDOMException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import spring_study.concertInfo.domain.cond.cocert_search.ConcertSearchCond;
 import spring_study.concertInfo.domain.cond.cocert_search.GenreCond;
 import spring_study.concertInfo.domain.cond.cocert_search.SearchTypeCond;
@@ -43,26 +41,24 @@ public class SearchController {
     }
 
     @GetMapping
-    public String concert(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch, Model model) throws IOException, JDOMException {
-        List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch);
+    public String concert(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch,
+                          Model model) {
+        return "concerts";
+    }
 
+    @PostMapping("/list")
+    public String concertListPost(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch,
+                              Model model) throws IOException, JDOMException {
+        List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch, 1);
         model.addAttribute("concerts", result);
         return "concerts";
     }
 
-//    @GetMapping("/list")
-//    public String concertList(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch, Model model) throws IOException, JDOMException {
-//        List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch);
-//
-//        int nowPage = concertSearch.getPage() + 1;
-//        int startPage = Math.max(nowPage - 4, 1);
-//        int endPage = Math.min(nowPage + 9, concertSearch.getPageSize());
-//
-//        model.addAttribute("concerts", result);
-//        model.addAttribute("nowPage", nowPage);
-//        model.addAttribute("startPage", startPage);
-//        model.addAttribute("endPage", endPage);
-//
-//        return "concerts";
-//    }
+    @GetMapping("/list")
+    public String concertListGet(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch,
+                                 @RequestParam(defaultValue = "1") int page, Model model) throws IOException, JDOMException {
+        List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch, page);
+        model.addAttribute("concerts", result);
+        return "concerts";
+    }
 }
