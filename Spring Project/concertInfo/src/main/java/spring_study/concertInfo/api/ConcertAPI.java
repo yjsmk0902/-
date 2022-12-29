@@ -26,7 +26,7 @@ public class ConcertAPI {
     private final RestTemplate restTemplate;
     private final String SERVICE_KEY = "935d9414e551433598a19a622d2c0660";
     private final String API_URL = "http://kopis.or.kr/openApi/restful/pblprfr";
-    public List<ConcertResponseDTO> requestConcert(ConcertSearchCond cond, int page)
+    public List<ConcertResponseDTO> requestConcert(ConcertSearchCond cond, Integer page)
             throws IOException, JDOMException {
 
         String stDate, edDate;
@@ -39,7 +39,7 @@ public class ConcertAPI {
             stDate = LocalDate.now().toString();
             edDate = stDate;
         }
-
+        log.info("StartEndDate()={}", cond.getStartEndDate());
         log.info("stDate={}", stDate);
         log.info("edDate={}", edDate);
 

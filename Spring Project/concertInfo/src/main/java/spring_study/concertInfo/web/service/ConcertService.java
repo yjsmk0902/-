@@ -17,7 +17,7 @@ public class ConcertService {
     private final ConcertAPI concertAPI;
 
     @Transactional(readOnly = true)
-    public List<ConcertResponseDTO> findByKeywordAndDate(ConcertSearchCond cond, int page) throws IOException, JDOMException {
+    public List<ConcertResponseDTO> findByKeywordAndDate(ConcertSearchCond cond,Integer page) throws IOException, JDOMException {
         return concertAPI.requestConcert(cond, page);
     }
 }

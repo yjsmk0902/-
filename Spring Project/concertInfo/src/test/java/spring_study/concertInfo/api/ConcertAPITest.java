@@ -23,11 +23,11 @@ class ConcertAPITest {
     private final ConcertAPI concertAPI;
     @Test
     public void paging() throws IOException, JDOMException {
-        List<ConcertResponseDTO> list = concertAPI.requestConcert(
-                new ConcertSearchCond("", "2022-01-01~2023-01-01"), 1);;
+//        List<ConcertResponseDTO> list = concertAPI.requestConcert(
+//                new ConcertSearchCond("", "2022-01-01~2023-01-01"));;
 
-        for (ConcertResponseDTO responseDTO : list) {
-            System.out.println("responseDTO = " + responseDTO);
-        }
+//        for (ConcertResponseDTO responseDTO : list) {
+//            System.out.println("responseDTO = " + responseDTO);
+//        }
     }
 }

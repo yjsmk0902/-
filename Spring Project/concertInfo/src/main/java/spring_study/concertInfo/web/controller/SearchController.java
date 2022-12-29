@@ -46,19 +46,28 @@ public class SearchController {
         return "concerts";
     }
 
-    @PostMapping("/list")
-    public String concertListPost(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch,
+    @GetMapping("/list")
+    public String concertList(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch,
+                              @RequestParam(defaultValue = "1") Integer page,
                               Model model) throws IOException, JDOMException {
-        List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch, 1);
+
+        List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch, page);
         model.addAttribute("concerts", result);
+
+        log.info("SearchController-concertList Active!!");
+        log.info("concertSearch={}", concertSearch);
+        log.info("page={}", page);
+
         return "concerts";
     }
 
-    @GetMapping("/list")
-    public String concertListGet(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch,
-                                 @RequestParam(defaultValue = "1") int page, Model model) throws IOException, JDOMException {
-        List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch, page);
-        model.addAttribute("concerts", result);
-        return "concerts";
-    }
+//    @GetMapping("/list")
+//    public String concertListGet(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch,
+//                                 @RequestParam(defaultValue = "1") int page, Model model) throws IOException, JDOMException {
+//        List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch, page);
+//        model.addAttribute("concerts", result);
+//        log.info("SearchController-concertListGet Active!!");
+//        log.info("concertSearch={}", concertSearch);
+//        return "concerts";
+//    }
 }

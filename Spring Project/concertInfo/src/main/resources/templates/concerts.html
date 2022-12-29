@@ -55,7 +55,7 @@
 <body style="overflow-y: auto">
 <div class="container py-5" style="">
     <header>
-        <form th:action="@{/search/list(page=1)}" th:object="${concertSearch}" method="post">
+        <form th:action="@{/search/list(page=${param.page})}" th:object="${concertSearch}" method="get">
             <div class="row py-1">
 
                 <!--GenreType 선택 창-->
@@ -149,13 +149,15 @@
                 <div class="row py-1" th:if="${concerts!=null}">
                     <div class="btn-group col">
                         <button class="btn btn-outline-primary"
-                                type="submit">이전 페이지</button>
-                        <button class="btn btn-outline-primary"
-                                th:onclick="|location.href='@{/search/list(page=2)}'|"
-                                type="button">다음 페이지</button>
+                                type="button">이전 페이지</button>
+
+                        <a class="btn btn-outline-primary"
+                           th:href="@{/search/list(page=${page+1}, genreCond=*{genreCond.name()},
+                           searchTypeCond=*{searchTypeCond.name()}, statusCond=*{statusCond.name()},
+                           name=*{name},startEndDate=*{startEndDate})}"
+                           type="button"> 다음 페이지</a>
                     </div>
                 </div>
-
             </div>
         </form>
     </header>
