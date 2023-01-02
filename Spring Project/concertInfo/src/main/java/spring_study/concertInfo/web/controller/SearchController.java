@@ -1,6 +1,7 @@
 package spring_study.concertInfo.web.controller;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.jdom2.JDOMException;
@@ -52,7 +53,9 @@ public class SearchController {
                               Model model) throws IOException, JDOMException {
 
         List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch, page);
+
         model.addAttribute("concerts", result);
+        model.addAttribute("page", page);
 
         log.info("SearchController-concertList Active!!");
         log.info("concertSearch={}", concertSearch);
