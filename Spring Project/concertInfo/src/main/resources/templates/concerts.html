@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <title>공연고</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
@@ -120,6 +121,7 @@
 
             <!--공연 리스트-->
             <div style="overflow-y: auto; height: 1000px">
+                <p th:if="${resultEmpty}">검색 결과가 없습니다</p>
                 <ul class="list-group">
                     <th:block th:each="concert : ${concerts}">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -149,7 +151,8 @@
                 </ul>
 
                 <div class="row py-1" th:if="${concerts!=null}">
-                    <div class="btn-group col">
+                    <div class="btn-group col" th:if="${!resultEmpty}">
+
                         <a class="btn btn-outline-primary" th:if="${page != 1}"
                            th:href="@{/search/list(page=${page}-1, genreCond=*{genreCond.name()},
                            searchTypeCond=*{searchTypeCond.name()}, statusCond=*{statusCond.name()},
@@ -161,6 +164,7 @@
                            searchTypeCond=*{searchTypeCond.name()}, statusCond=*{statusCond.name()},
                            name=*{name},startEndDate=*{startEndDate})}"
                            type="button"> 다음 페이지</a>
+
                     </div>
                 </div>
             </div>

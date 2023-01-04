@@ -53,9 +53,12 @@ public class SearchController {
                               Model model) throws IOException, JDOMException {
 
         List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch, page);
+        boolean resultEmpty = result.isEmpty();
 
         model.addAttribute("concerts", result);
+        model.addAttribute("resultEmpty", resultEmpty);
         model.addAttribute("page", page);
+
 
         log.info("SearchController-concertList Active!!");
         log.info("concertSearch={}", concertSearch);
@@ -63,14 +66,4 @@ public class SearchController {
 
         return "concerts";
     }
-
-//    @GetMapping("/list")
-//    public String concertListGet(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch,
-//                                 @RequestParam(defaultValue = "1") int page, Model model) throws IOException, JDOMException {
-//        List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch, page);
-//        model.addAttribute("concerts", result);
-//        log.info("SearchController-concertListGet Active!!");
-//        log.info("concertSearch={}", concertSearch);
-//        return "concerts";
-//    }
 }

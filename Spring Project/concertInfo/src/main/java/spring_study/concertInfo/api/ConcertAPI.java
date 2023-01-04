@@ -23,7 +23,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class ConcertAPI {
-    private final RestTemplate restTemplate;
     private final String SERVICE_KEY = "935d9414e551433598a19a622d2c0660";
     private final String API_URL = "http://kopis.or.kr/openApi/restful/pblprfr";
     public List<ConcertResponseDTO> requestConcert(ConcertSearchCond cond, Integer page)
@@ -52,13 +51,14 @@ public class ConcertAPI {
                 .append("&cpage=" + page)
                 .append("&rows=" + 10)
                 .append("&shprfnm=" + cond.getName());
-
         log.info("URL={}", OpenConcertApi.toString());
 
         URL url = new URL(OpenConcertApi.toString());
+
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
         conn.setRequestProperty("Content-Type", "application/xml");
+
         conn.connect();
 
         List<Element> result = getXML(conn.getInputStream());
@@ -89,7 +89,6 @@ public class ConcertAPI {
         SAXBuilder builder = new SAXBuilder();
 
         Document document = builder.build(inputStream);
-
         Element dbs = document.getRootElement();
         return dbs.getChildren();
     }
