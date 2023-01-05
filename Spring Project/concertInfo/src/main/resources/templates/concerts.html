@@ -118,6 +118,7 @@
                             <label class="" th:text="${concert.getTitle()}"> 공연 이름</label>
 
                             <div class="row py-1">
+
                                 <div class="col py-1">
                                 <span class="badge bg-primary rounded-pill py-1"
                                       th:text="${concert.getPlace()}">
@@ -128,6 +129,13 @@
                                 <span class="badge bg-primary rounded-pill py-1"
                                       th:text="|${concert.getStDate()}   -   ${concert.getEdDate}|">
                                     공연 날짜
+                                </span>
+                                </div>
+
+                                <div class="col py-1">
+                                <span class="badge bg-primary rounded-pill py-1"
+                                      th:text="${concert.getGenre()}">
+                                    공연 장르
                                 </span>
                                 </div>
 
@@ -145,14 +153,14 @@
 
                         <a class="btn btn-outline-primary" th:if="${page != 1}"
                            th:href="@{/search/list(page=${page}-1, genreCond=*{genreCond.name()},
-                           statusCond=*{statusCond.name()}, place=*{showPlace},
-                           name=*{showName},startEndDate=*{startEndDate})}"
+                           statusCond=*{statusCond.name()}, showPlace=*{showPlace},
+                           showName=*{showName},startEndDate=*{startEndDate})}"
                            type="button"> 이전 페이지</a>
 
-                        <a class="btn btn-outline-primary"
+                        <a class="btn btn-outline-primar    y"
                            th:href="@{/search/list(page=${page}+1, genreCond=*{genreCond.name()},
-                           statusCond=*{statusCond.name()}, place=*{showPlace},
-                           name=*{showName},startEndDate=*{startEndDate})}"
+                           statusCond=*{statusCond.name()}, showPlace=*{showPlace},
+                           showName=*{showName},startEndDate=*{startEndDate})}"
                            type="button"> 다음 페이지</a>
 
                     </div>

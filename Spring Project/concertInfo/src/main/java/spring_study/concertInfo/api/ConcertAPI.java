@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import spring_study.concertInfo.domain.cond.cocert_search.ConcertSearchCond;
 import spring_study.concertInfo.domain.cond.cocert_search.GenreCond;
+import spring_study.concertInfo.domain.cond.cocert_search.StatusCond;
 import spring_study.concertInfo.domain.dto.ConcertResponseDTO;
 
 import java.io.IOException;
@@ -30,7 +31,9 @@ public class ConcertAPI {
             throws IOException, JDOMException {
 
         String stDate, edDate;
-        String genre = getGenre(cond.getGenreCond());
+        String genre = cond.getGenreCond() == null ? "" : getGenre(cond.getGenreCond());
+        String status = getStatus(cond.getStatusCond());
+
         if (cond.getStartEndDate() != null) {
             String[] date = cond.getStartEndDate()
                     .replaceAll("-", "").split("~");
@@ -52,9 +55,11 @@ public class ConcertAPI {
                 .append("&eddate=" + edDate)
                 .append("&cpage=" + page)
                 .append("&rows=" + 10)
-                .append("&shprfnm=" + cond.getShowName())
-                .append("&shprfnmfct=" + cond.getShowPlace())
-                .append("&shcate=" + genre);
+                .append("&shcate=" + genre)
+                .append("&prfstate=" + status);
+        if (cond.getShowName() != "")     OpenConcertApi.append("&shprfnm=" + cond.getShowName());
+        if (cond.getShowPlace() != "")    OpenConcertApi.append("&shprfnmfct=" + cond.getShowPlace());
+
         log.info("URL={}", OpenConcertApi.toString());
 
         URL url = new URL(OpenConcertApi.toString());
@@ -100,7 +105,7 @@ public class ConcertAPI {
     private String getGenre(GenreCond genreCond) {
         switch (genreCond) {
             case PLAY:              return "AAAA";
-            case MUSICAL:           return "GGGA";
+            case MUSICAL:           return "AAAB";
             case DANCE:             return "BBBC";
             case CLASSIC:           return "CCCA";
             case PUBLIC_DANCING:    return "BBBE";
@@ -109,6 +114,15 @@ public class ConcertAPI {
             case CIRCUS:            return "EEEB";
             case PUBLIC_MUSIC:      return "CCCD";
             default:                return null;
+        }
+    }
+
+    private String getStatus(StatusCond statusCond) {
+        switch (statusCond) {
+            case PLAYING:       return "02";
+            case EXPECTED:      return "01";
+            case COMPLETED:     return "03";
+            default:            return null;
         }
     }
 }
