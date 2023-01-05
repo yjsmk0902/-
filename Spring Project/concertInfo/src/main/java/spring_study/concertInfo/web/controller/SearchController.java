@@ -62,6 +62,7 @@ public class SearchController {
 
         log.info("SearchController-concertList Active!!");
         log.info("concertSearch={}", concertSearch);
+        log.info("result={}", result);
         log.info("page={}", page);
 
         return "concerts";

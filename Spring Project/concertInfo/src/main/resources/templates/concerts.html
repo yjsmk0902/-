@@ -74,19 +74,6 @@
             </div>
 
             <div class="row py-1">
-
-                <!--SearchType 선택 창-->
-                <div class="btn-group col" role="group" aria-label="Basic radio toggle button group">
-                    <th:block th:each="type : ${searchTypes}">
-                        <input type="radio" class="btn-check"
-                               th:field="*{searchTypeCond}" th:value="${type.name()}">
-
-                        <label class="btn btn-outline-primary" th:for="${#ids.prev('searchTypeCond')}"
-                               th:text="${type.description}">
-                        </label>
-                    </th:block>
-                </div>
-
                 <!--StatusType 선택 창-->
                 <div class="btn-group col" role="group" aria-label="Basic radio toggle button group">
                     <th:block th:each="type : ${statusTypes}">
@@ -100,11 +87,14 @@
                 </div>
             </div>
 
-            <!--검색 창-->
+            <!--공연 이름 검색 창-->
             <div class="row py-1">
-                <input type="text" id="search" class="form-control"
-                       th:field="*{name}"
-                       placeholder="검색어를 입력하세요."/>
+                <input type="text" id="searchName" class="form-control col"
+                       th:field="*{showName}"
+                       placeholder="공연 이름을 입력하세요."/>
+                <input type="text" id="searchPlace" class="form-control col"
+                       th:field="*{showPlace}"
+                       placeholder="공연 장소를 입력하세요."/>
             </div>
 
             <!--날짜 범위 선택 창-->
@@ -155,14 +145,14 @@
 
                         <a class="btn btn-outline-primary" th:if="${page != 1}"
                            th:href="@{/search/list(page=${page}-1, genreCond=*{genreCond.name()},
-                           searchTypeCond=*{searchTypeCond.name()}, statusCond=*{statusCond.name()},
-                           name=*{name},startEndDate=*{startEndDate})}"
+                           statusCond=*{statusCond.name()}, place=*{showPlace},
+                           name=*{showName},startEndDate=*{startEndDate})}"
                            type="button"> 이전 페이지</a>
 
                         <a class="btn btn-outline-primary"
                            th:href="@{/search/list(page=${page}+1, genreCond=*{genreCond.name()},
-                           searchTypeCond=*{searchTypeCond.name()}, statusCond=*{statusCond.name()},
-                           name=*{name},startEndDate=*{startEndDate})}"
+                           statusCond=*{statusCond.name()}, place=*{showPlace},
+                           name=*{showName},startEndDate=*{startEndDate})}"
                            type="button"> 다음 페이지</a>
 
                     </div>

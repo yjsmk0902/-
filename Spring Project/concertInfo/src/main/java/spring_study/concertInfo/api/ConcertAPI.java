@@ -9,6 +9,7 @@ import org.jdom2.input.SAXBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import spring_study.concertInfo.domain.cond.cocert_search.ConcertSearchCond;
+import spring_study.concertInfo.domain.cond.cocert_search.GenreCond;
 import spring_study.concertInfo.domain.dto.ConcertResponseDTO;
 
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class ConcertAPI {
             throws IOException, JDOMException {
 
         String stDate, edDate;
+        String genre = getGenre(cond.getGenreCond());
         if (cond.getStartEndDate() != null) {
             String[] date = cond.getStartEndDate()
                     .replaceAll("-", "").split("~");
@@ -50,7 +52,9 @@ public class ConcertAPI {
                 .append("&eddate=" + edDate)
                 .append("&cpage=" + page)
                 .append("&rows=" + 10)
-                .append("&shprfnm=" + cond.getName());
+                .append("&shprfnm=" + cond.getShowName())
+                .append("&shprfnmfct=" + cond.getShowPlace())
+                .append("&shcate=" + genre);
         log.info("URL={}", OpenConcertApi.toString());
 
         URL url = new URL(OpenConcertApi.toString());
@@ -91,5 +95,20 @@ public class ConcertAPI {
         Document document = builder.build(inputStream);
         Element dbs = document.getRootElement();
         return dbs.getChildren();
+    }
+
+    private String getGenre(GenreCond genreCond) {
+        switch (genreCond) {
+            case PLAY:              return "AAAA";
+            case MUSICAL:           return "GGGA";
+            case DANCE:             return "BBBC";
+            case CLASSIC:           return "CCCA";
+            case PUBLIC_DANCING:    return "BBBE";
+            case GUKAK:             return "CCCC";
+            case COMPLEX:           return "EEEA";
+            case CIRCUS:            return "EEEB";
+            case PUBLIC_MUSIC:      return "CCCD";
+            default:                return null;
+        }
     }
 }
