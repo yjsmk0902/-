@@ -58,7 +58,6 @@
     <header>
         <form th:action="@{/search/list(page=${param.page})}" th:object="${concertSearch}" method="get">
             <div class="row py-1">
-
                 <input type="hidden" name="page" value="1">
 
                 <!--GenreType 선택 창-->
@@ -73,13 +72,12 @@
                 </div>
             </div>
 
+            <!--StatusType 선택 창-->
             <div class="row py-1">
-                <!--StatusType 선택 창-->
                 <div class="btn-group col" role="group" aria-label="Basic radio toggle button group">
                     <th:block th:each="type : ${statusTypes}">
                         <input type="radio" class="btn-check"
                                th:field="*{statusCond}" th:value="${type.name()}">
-
                         <label class="btn btn-outline-primary" th:for="${#ids.prev('statusCond')}"
                                th:text="${type.description}">
                         </label>
@@ -111,7 +109,15 @@
 
             <!--공연 리스트-->
             <div style="overflow-y: auto; height: 1000px">
-                <p th:if="${resultEmpty}">검색 결과가 없습니다</p>
+                <p th:if="${resultEmpty}">
+                    <script th:if="${resultEmpty&&page!=1}" type="text/javascript">
+                        alert("마지막 페이지입니다")
+                        history.go(-1);
+                    </script>
+                    검색 결과가 없습니다
+                </p>
+
+
                 <ul class="list-group">
                     <th:block th:each="concert : ${concerts}">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -125,10 +131,18 @@
                                     공연 장소
                                 </span>
                                 </div>
+
                                 <div class="col py-1">
                                 <span class="badge bg-primary rounded-pill py-1"
                                       th:text="|${concert.getStDate()}   -   ${concert.getEdDate}|">
                                     공연 날짜
+                                </span>
+                                </div>
+
+                                <div class="col py-1">
+                                <span class="badge bg-primary rounded-pill py-1"
+                                      th:text="${concert.getStatus()}">
+                                    공연 상태
                                 </span>
                                 </div>
 
@@ -150,16 +164,15 @@
 
                 <div class="row py-1" th:if="${concerts!=null}">
                     <div class="btn-group col" th:if="${!resultEmpty}">
-
                         <a class="btn btn-outline-primary" th:if="${page != 1}"
-                           th:href="@{/search/list(page=${page}-1, genreCond=*{genreCond.name()},
-                           statusCond=*{statusCond.name()}, showPlace=*{showPlace},
+                           th:href="@{/search/list(page=${page}-1, statusCond=*{statusCond.name()},
+                           genreCond=*{genreCond.name()}, showPlace=*{showPlace},
                            showName=*{showName},startEndDate=*{startEndDate})}"
                            type="button"> 이전 페이지</a>
 
-                        <a class="btn btn-outline-primar    y"
-                           th:href="@{/search/list(page=${page}+1, genreCond=*{genreCond.name()},
-                           statusCond=*{statusCond.name()}, showPlace=*{showPlace},
+                        <a class="btn btn-outline-primary"
+                           th:href="@{/search/list(page=${page}+1, statusCond=*{statusCond.name()},
+                           genreCond=*{genreCond.name()}, showPlace=*{showPlace},
                            showName=*{showName},startEndDate=*{startEndDate})}"
                            type="button"> 다음 페이지</a>
 

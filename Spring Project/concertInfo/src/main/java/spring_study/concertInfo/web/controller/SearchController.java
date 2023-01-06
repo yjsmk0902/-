@@ -59,12 +59,6 @@ public class SearchController {
         model.addAttribute("resultEmpty", resultEmpty);
         model.addAttribute("page", page);
 
-
-        log.info("SearchController-concertList Active!!");
-        log.info("concertSearch={}", concertSearch);
-        log.info("result={}", result);
-        log.info("page={}", page);
-
         return "concerts";
     }
 }

@@ -32,7 +32,7 @@ public class ConcertAPI {
 
         String stDate, edDate;
         String genre = cond.getGenreCond() == null ? "" : getGenre(cond.getGenreCond());
-        String status = getStatus(cond.getStatusCond());
+        String status = cond.getStartEndDate() == null ? "" : getStatus(cond.getStatusCond());
 
         if (cond.getStartEndDate() != null) {
             String[] date = cond.getStartEndDate()
@@ -43,9 +43,6 @@ public class ConcertAPI {
             stDate = LocalDate.now().toString();
             edDate = stDate;
         }
-        log.info("StartEndDate()={}", cond.getStartEndDate());
-        log.info("stDate={}", stDate);
-        log.info("edDate={}", edDate);
 
         StringBuilder OpenConcertApi = new StringBuilder();
         OpenConcertApi
@@ -55,8 +52,7 @@ public class ConcertAPI {
                 .append("&eddate=" + edDate)
                 .append("&cpage=" + page)
                 .append("&rows=" + 10)
-                .append("&shcate=" + genre)
-                .append("&prfstate=" + status);
+                .append("&shcate=" + genre);
         if (cond.getShowName() != "")     OpenConcertApi.append("&shprfnm=" + cond.getShowName());
         if (cond.getShowPlace() != "")    OpenConcertApi.append("&shprfnmfct=" + cond.getShowPlace());
 
@@ -106,23 +102,21 @@ public class ConcertAPI {
         switch (genreCond) {
             case PLAY:              return "AAAA";
             case MUSICAL:           return "AAAB";
-            case DANCE:             return "BBBC";
+            case DANCE:             return "BBBA";
             case CLASSIC:           return "CCCA";
-            case PUBLIC_DANCING:    return "BBBE";
+            case OPERA:             return "CCCB";
             case GUKAK:             return "CCCC";
             case COMPLEX:           return "EEEA";
-            case CIRCUS:            return "EEEB";
-            case PUBLIC_MUSIC:      return "CCCD";
             default:                return null;
         }
     }
 
     private String getStatus(StatusCond statusCond) {
         switch (statusCond) {
-            case PLAYING:       return "02";
-            case EXPECTED:      return "01";
-            case COMPLETED:     return "03";
-            default:            return null;
+            case EXPECTED:          return "01";
+            case PLAYING:           return "02";
+            case COMPLETED:         return "03";
+            default:                return null;
         }
     }
 }
