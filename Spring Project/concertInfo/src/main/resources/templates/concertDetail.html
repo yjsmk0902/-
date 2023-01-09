@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공연고</title>
+</head>
+<body>
+    <h1>success!</h1>
+    <form th:object="${info}" >
+        <p th:text="*{showName}"></p>
+    </form>
+</body>
+</html>

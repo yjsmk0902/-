@@ -10,11 +10,13 @@ import org.springframework.stereotype.Service;
 import spring_study.concertInfo.domain.cond.cocert_search.ConcertSearchCond;
 import spring_study.concertInfo.domain.cond.cocert_search.GenreCond;
 import spring_study.concertInfo.domain.cond.cocert_search.StatusCond;
+import spring_study.concertInfo.domain.dto.ConcertDetailsResponseDTO;
 import spring_study.concertInfo.domain.dto.ConcertResponseDTO;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import java.util.List;
 public class ConcertAPI {
     private final String SERVICE_KEY = "935d9414e551433598a19a622d2c0660";
     private final String API_URL = "http://kopis.or.kr/openApi/restful/pblprfr";
+    private final String API_DETAIL_URL = "http://kopis.or.kr/openApi/restful/pblprfr";
     public List<ConcertResponseDTO> requestConcert(ConcertSearchCond cond, Integer page)
             throws IOException, JDOMException {
 
@@ -50,29 +53,44 @@ public class ConcertAPI {
                 .append("&stdate=" + stDate)
                 .append("&eddate=" + edDate)
                 .append("&cpage=" + page)
-                .append("&rows=" + 10)
+                .append("&rows=" + 12)
                 .append("&prfstate=" + status)
                 .append("&shcate=" + genre);
         if (cond.getShowName() != "")     OpenConcertApi.append("&shprfnm=" + cond.getShowName().replace(" ","+"));
-
         if (cond.getShowPlace() != "")    OpenConcertApi.append("&shprfnmfct=" + cond.getShowPlace().replace(" ","+"));
 
-        log.info("URL={}", OpenConcertApi.toString());
+        HttpURLConnection conn = getHttpURLConnection(OpenConcertApi);
 
-        URL url = new URL(OpenConcertApi.toString());
+        List<Element> result = getXMLs(conn.getInputStream());
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-        conn.setRequestProperty("Content-Type", "application/xml");
-
-        conn.connect();
-
-        List<Element> result = getXML(conn.getInputStream());
-
-        return getDtoList(result);
+        return getConcertResponseDtoList(result);
     }
 
-    private static List<ConcertResponseDTO> getDtoList(List<Element> result) {
+    public ConcertDetailsResponseDTO requestConcertDetails(String showId) throws IOException, JDOMException {
+
+        StringBuilder OpenConcertApi = new StringBuilder();
+        OpenConcertApi
+                .append(API_DETAIL_URL)
+                .append("/" + showId)
+                .append("?service=" + SERVICE_KEY);
+
+        HttpURLConnection conn = getHttpURLConnection(OpenConcertApi);
+
+        Element result = getXML(conn.getInputStream());
+        return getConcertDetailsResponseDto(result);
+    }
+
+    private static HttpURLConnection getHttpURLConnection(StringBuilder OpenConcertApi) throws IOException {
+        URL url = new URL(OpenConcertApi.toString());
+        log.info("URL={}", OpenConcertApi.toString());
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestProperty("Content-Type", "application/xml");
+        conn.connect();
+        return conn;
+    }
+
+    private static List<ConcertResponseDTO> getConcertResponseDtoList(List<Element> result) {
         List<ConcertResponseDTO> concertList = new ArrayList<>();
         for (Element response : result) {
             concertList.add(new ConcertResponseDTO(
@@ -91,12 +109,46 @@ public class ConcertAPI {
         return concertList;
     }
 
-    private List<Element> getXML(InputStream inputStream) throws IOException, JDOMException {
+    private static ConcertDetailsResponseDTO getConcertDetailsResponseDto(Element response) {
+        List<Element> styurls = response.getChildren("styurl");
+        List<String> styImg = new ArrayList<>();
+        for (Element styurl : styurls) {
+            styImg.add(styurl.toString());
+        }
+        return new ConcertDetailsResponseDTO(
+                response.getChildText("mt20id"),
+                response.getChildText("mt10id"),
+                response.getChildText("prfnm"),
+                response.getChildText("prfpdto"),
+                response.getChildText("fcltynm"),
+                response.getChildText("prfcast"),
+                response.getChildText("prfcrew"),
+                response.getChildText("prfuntime"),
+                response.getChildText("prfage"),
+                response.getChildText("entrpsnm"),
+                response.getChildText("pcseguidance"),
+                response.getChildText("poster"),
+                response.getChildText("sty"),
+                response.getChildText("genrenm"),
+                response.getChildText("prfstate"),
+                response.getChildText("openrun"),
+                styImg,
+                response.getChildText("dtguidance"));
+    }
+
+    private List<Element> getXMLs(InputStream inputStream) throws IOException, JDOMException {
         SAXBuilder builder = new SAXBuilder();
 
         Document document = builder.build(inputStream);
         Element dbs = document.getRootElement();
         return dbs.getChildren();
+    }
+
+    private Element getXML(InputStream inputStream) throws IOException, JDOMException {
+        SAXBuilder builder = new SAXBuilder();
+        Document document = builder.build(inputStream);
+        Element dbs = document.getRootElement();
+        return dbs.getChild("db");
     }
 
     private String getGenre(GenreCond genreCond) {

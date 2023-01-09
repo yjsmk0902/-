@@ -1,8 +1,6 @@
 package spring_study.concertInfo.domain.dto;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Data
 public class ConcertResponseDTO {
