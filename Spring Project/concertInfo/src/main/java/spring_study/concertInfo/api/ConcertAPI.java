@@ -52,9 +52,11 @@ public class ConcertAPI {
                 .append("&eddate=" + edDate)
                 .append("&cpage=" + page)
                 .append("&rows=" + 10)
+                .append("&prfstate=" + status)
                 .append("&shcate=" + genre);
-        if (cond.getShowName() != "")     OpenConcertApi.append("&shprfnm=" + cond.getShowName());
-        if (cond.getShowPlace() != "")    OpenConcertApi.append("&shprfnmfct=" + cond.getShowPlace());
+        if (cond.getShowName() != "")     OpenConcertApi.append("&shprfnm=" + cond.getShowName().replace(" ","+"));
+
+        if (cond.getShowPlace() != "")    OpenConcertApi.append("&shprfnmfct=" + cond.getShowPlace().replace(" ","+"));
 
         log.info("URL={}", OpenConcertApi.toString());
 
