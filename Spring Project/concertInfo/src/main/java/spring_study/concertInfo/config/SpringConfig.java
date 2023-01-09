@@ -1,4 +1,4 @@
-package spring_study.concertInfo;
+package spring_study.concertInfo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
