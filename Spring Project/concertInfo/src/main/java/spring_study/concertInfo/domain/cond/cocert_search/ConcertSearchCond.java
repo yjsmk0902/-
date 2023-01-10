@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class ConcertSearchCond {
 
-    private GenreCond genreCond = GenreCond.MUSICAL;           //PLAY, MUSICAL, DANCE, CLASSIC, OPERA, GUKAK
+    private GenreCond genreCond = GenreCond.TOTAL;           //PLAY, MUSICAL, DANCE, CLASSIC, OPERA, GUKAK, TOTAL, COMPLEX
     private StatusCond statusCond = StatusCond.PLAYING;         //EXPECTED, PLAYING, COMPLETED
 
     private String showName;

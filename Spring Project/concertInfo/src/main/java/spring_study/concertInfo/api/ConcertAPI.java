@@ -34,7 +34,9 @@ public class ConcertAPI {
 
         String stDate, edDate;
         String genre = cond.getGenreCond() == null ? "" : getGenre(cond.getGenreCond());
-        String status = cond.getStartEndDate() == null ? "" : getStatus(cond.getStatusCond());
+        String status = cond.getStatusCond() == null ? "" : getStatus(cond.getStatusCond());
+        String showName = cond.getShowName() == null ? "" : cond.getShowName();
+        String showPlace = cond.getShowPlace() == null ? "" : cond.getShowPlace();
 
         if (cond.getStartEndDate() != null) {
             String[] date = cond.getStartEndDate()
@@ -46,6 +48,7 @@ public class ConcertAPI {
             edDate = stDate;
         }
 
+
         StringBuilder OpenConcertApi = new StringBuilder();
         OpenConcertApi
                 .append(API_URL)
@@ -56,8 +59,9 @@ public class ConcertAPI {
                 .append("&rows=" + 12)
                 .append("&prfstate=" + status)
                 .append("&shcate=" + genre);
-        if (cond.getShowName() != "")     OpenConcertApi.append("&shprfnm=" + cond.getShowName().replace(" ","+"));
-        if (cond.getShowPlace() != "")    OpenConcertApi.append("&shprfnmfct=" + cond.getShowPlace().replace(" ","+"));
+
+        if (showName != "")     OpenConcertApi.append("&shprfnm=" + showName.replace(" ","+"));
+        if (showPlace != "")    OpenConcertApi.append("&shprfnmfct=" + showPlace.replace(" ","+"));
 
         HttpURLConnection conn = getHttpURLConnection(OpenConcertApi);
 
@@ -119,11 +123,12 @@ public class ConcertAPI {
                 response.getChildText("mt20id"),
                 response.getChildText("mt10id"),
                 response.getChildText("prfnm"),
+                response.getChildText("prfpdfrom"),
                 response.getChildText("prfpdto"),
                 response.getChildText("fcltynm"),
                 response.getChildText("prfcast"),
                 response.getChildText("prfcrew"),
-                response.getChildText("prfuntime"),
+                response.getChildText("prfruntime"),
                 response.getChildText("prfage"),
                 response.getChildText("entrpsnm"),
                 response.getChildText("pcseguidance"),
@@ -160,7 +165,7 @@ public class ConcertAPI {
             case OPERA:             return "CCCB";
             case GUKAK:             return "CCCC";
             case COMPLEX:           return "EEEA";
-            default:                return null;
+            default:                return "";
         }
     }
 

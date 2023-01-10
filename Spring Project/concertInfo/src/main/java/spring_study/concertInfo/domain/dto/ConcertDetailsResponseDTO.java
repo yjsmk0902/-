@@ -22,17 +22,17 @@ public class ConcertDetailsResponseDTO {
     private String ticketPrice;
     private String poster_URL;
     private String story;
+    private String genre;
     private String status;
     private String openRun;
     private List<String> introImg;
     private String showtime;
 
     public ConcertDetailsResponseDTO(
-            String showId, String placeId, String showName,
-            String stDate, String edDate, String place,
-            String actors, String producers, String runtime,
-            String age, String production, String ticketPrice,
-            String poster_URL, String story, String status,
+            String showId, String placeId, String showName, String stDate,
+            String edDate, String place, String actors, String producers,
+            String runtime, String age, String production, String ticketPrice,
+            String poster_URL, String story, String genre, String status,
             String openRun, List<String> introImg, String showtime) {
         this.showId = showId;
         this.placeId = placeId;
@@ -48,6 +48,7 @@ public class ConcertDetailsResponseDTO {
         this.ticketPrice = ticketPrice;
         this.poster_URL = poster_URL;
         this.story = story;
+        this.genre = genre;
         this.status = status;
         this.openRun = openRun;
         this.introImg = introImg;
