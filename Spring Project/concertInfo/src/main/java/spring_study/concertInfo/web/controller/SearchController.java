@@ -79,7 +79,9 @@ public class SearchController {
     }
 
     @GetMapping("/info")
-    public String concertDetails(@RequestParam(name = "show") String showId, Model model) throws IOException, JDOMException {
+    public String concertDetails(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch,
+                                 @RequestParam(name = "show") String showId,
+                                 Model model) throws IOException, JDOMException {
         ConcertDetailsResponseDTO info = concertService.findById(showId);
         log.info("info={}", info);
         model.addAttribute("info", info);
