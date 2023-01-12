@@ -1,17 +1,16 @@
 package spring_study.concertInfo.web.controller;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import spring_study.concertInfo.domain.dto.MemberLoginRequestDTO;
 import spring_study.concertInfo.jwt.TokenInfo;
 import spring_study.concertInfo.web.service.MemberService;
 
 @Slf4j
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/members")
 public class MemberController {

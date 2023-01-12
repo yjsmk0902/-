@@ -42,8 +42,7 @@ public class SearchController {
     }
 
     @GetMapping
-    public String concert(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch,
-                          Model model) {
+    public String concert(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch) {
         return "concerts";
     }
 
