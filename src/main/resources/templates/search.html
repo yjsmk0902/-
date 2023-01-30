@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      th:href="@{/img/SHOWGO/1.png}"
+      href="../static/img/SHOWGO/1.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      th:href="@{/css/style.css}"
+      href="../static/css/style.css"
+    />
+    <title>SHOWGO</title>
+  </head>
+  <body>
+    <header>
+      <nav></nav>
+    </header>
+
+    <main id="search-main">
+      <form id="search-form">
+        <!-- GenreType -->
+        <div id="genreType" class="radio-selector">
+          <label>
+            <input type="radio" name="genreType" checked />
+            <span>타입</span>
+          </label>
+          <label>
+            <input type="radio" name="genreType" />
+            <span>타입</span>
+          </label>
+          <label>
+            <input type="radio" name="genreType" />
+            <span>타입</span>
+          </label>
+          <label>
+            <input type="radio" name="genreType" />
+            <span>타입</span>
+          </label>
+          <label>
+            <input type="radio" name="genreType" />
+            <span>타입</span>
+          </label>
+          <label>
+            <input type="radio" name="genreType" />
+            <span>타입</span>
+          </label>
+          <label>
+            <input type="radio" name="genreType" />
+            <span>타입</span>
+          </label>
+          <label>
+            <input type="radio" name="genreType" />
+            <span>타입</span>
+          </label>
+        </div>
+
+        <!-- StatusType -->
+        <div id="statusType" class="radio-selector">
+          <label>
+            <input type="radio" name="statusType" checked />
+            <span>타입</span>
+          </label>
+          <label>
+            <input type="radio" name="statusType" />
+            <span>타입</span>
+          </label>
+          <label>
+            <input type="radio" name="statusType" />
+            <span>타입</span>
+          </label>
+        </div>
+
+        <!-- 공연 검색 창 -->
+        <div id="search-main__keyword">
+          <input
+            class="search-main__keyword-input"
+            type="text"
+            placeholder="공연 이름을 입력하세요."
+          />
+          <input
+            class="search-main__keyword-input"
+            type="text"
+            placeholder="공연 장소를 입력하세요."
+          />
+        </div>
+
+        <!-- 검색 -->
+        <button>GO! GO! GO!</button>
+      </form>
+    </main>
+
+    <script
+      src="https://kit.fontawesome.com/df25e700c0.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="../static/js/dateRangePicker.js"
+    ></script>
+  </body>
+</html>

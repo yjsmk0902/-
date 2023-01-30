@@ -1,8 +1,7 @@
-body {
+#index-body {
   background-image: url("../../img/index/3.jpg");
 }
-
-main {
+#index-main {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,6 +10,7 @@ main {
   height: 100vh;
   color: white;
 }
+
 .index-main {
   padding: 200px 150px;
   position: relative;
