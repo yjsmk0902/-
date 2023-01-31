@@ -43,7 +43,7 @@ public class SearchController {
 
     @GetMapping
     public String concert(@ModelAttribute("concertSearch") ConcertSearchCond concertSearch) {
-        return "concerts";
+        return "search";
     }
 
     @GetMapping("/list")
@@ -74,7 +74,7 @@ public class SearchController {
         model.addAttribute("resultEmpty", resultEmpty);
         model.addAttribute("page", page);
 
-        return "concerts";
+        return "search";
     }
 
     @GetMapping("/info")
