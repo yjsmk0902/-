@@ -1,0 +1,10 @@
+.btn {
+  color: black;
+  border: var(--button-border);
+  border-radius: 6px;
+  background-color: white;
+}
+.btn:hover {
+  background-color: var(--main-color);
+  color: white;
+}

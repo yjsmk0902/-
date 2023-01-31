@@ -1,10 +1,9 @@
 
 // DateRangePicker
-import "https://cdn.jsdelivr.net/jquery/latest/jquery.min.js";
-import "https://cdn.jsdelivr.net/momentjs/latest/moment.min.js";
-import "https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"; 
-
-
+document.write(`<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>`);
+document.write(`<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>`);
+document.write(`<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>`);
+document.write(` <script>
 $(function () {
     $('.dateRange').daterangepicker({
         locale: {
@@ -31,6 +30,7 @@ $(function () {
                 "11월",
                 "12월",
             ],
+            buttonClasses: "btn"
         },
         opens: 'left'
     }, function (start, end, label) {
@@ -43,3 +43,4 @@ $(function () {
         );
     });
 });
+</script>`);

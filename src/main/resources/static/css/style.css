@@ -6,6 +6,7 @@
 
 /* Component */
 @import "component/radioSelector.css";
+@import "component/btn.css";
 
 /* DateRangePicker */
 @import url("https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css");
