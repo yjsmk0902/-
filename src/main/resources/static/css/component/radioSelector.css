@@ -22,6 +22,10 @@
   justify-content: center;
 }
 
+.radio-selector span:hover {
+  background-color: #a398c7;
+}
+
 .radio-selector label:first-child span {
   border-left: var(--selector-border);
   border-top-left-radius: 6px;

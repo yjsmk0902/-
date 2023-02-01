@@ -114,11 +114,12 @@ public class ConcertAPI {
     }
 
     private static ConcertDetailsResponseDTO getConcertDetailsResponseDto(Element response) {
-        List<Element> styurls = response.getChildren("styurl");
+        List<Element> styurls = response.getChild("styurls").getChildren();
         List<String> styImg = new ArrayList<>();
         for (Element styurl : styurls) {
-            styImg.add(styurl.toString());
+            styImg.add(styurl.getText());
         }
+        log.info("styImg={}", styImg);
         return new ConcertDetailsResponseDTO(
                 response.getChildText("mt20id"),
                 response.getChildText("mt10id"),
@@ -159,12 +160,14 @@ public class ConcertAPI {
     private String getGenre(GenreCond genreCond) {
         switch (genreCond) {
             case PLAY:              return "AAAA";
-            case MUSICAL:           return "AAAB";
-            case DANCE:             return "BBBA";
+            case MUSICAL:           return "GGGA";
+            case DANCE:             return "BBBC";
             case CLASSIC:           return "CCCA";
-            case OPERA:             return "CCCB";
+            case CIRCUS:            return "EEEB";
             case GUKAK:             return "CCCC";
+            case MUSIC:             return "CCCD";
             case COMPLEX:           return "EEEA";
+            case DANCE_POPULAR:     return "BBBE";
             default:                return "";
         }
     }
