@@ -193,12 +193,7 @@
   animation: gliterBtn 1.5s ease-in-out infinite;
 }
 
-.search-page__prev {
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-}
-
+.search-page__prev,
 .search-page__next {
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+  border-radius: 15px;
 }
