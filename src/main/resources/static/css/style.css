@@ -3,6 +3,7 @@
 /* Screen */
 @import "screen/index.css";
 @import "screen/search.css";
+@import "screen/searchDetails.css";
 
 /* Component */
 @import "component/radioSelector.css";
