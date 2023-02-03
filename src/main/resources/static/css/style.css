@@ -4,6 +4,7 @@
 @import "screen/index.css";
 @import "screen/search.css";
 @import "screen/searchDetails.css";
+@import "screen/login.css";
 
 /* Component */
 @import "component/radioSelector.css";

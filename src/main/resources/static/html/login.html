@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      th:href="@{/img/SHOWGO/1.png}"
+      href="../img/SHOWGO/1.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      th:href="@{/css/style.css}"
+      href="../css/style.css"
+    />
+    <title>SHOWGO</title>
+  </head>
+
+  <body id="login-body">
+    <header>
+      <nav></nav>
+    </header>
+
+    <main id="login-main">
+      <span class="login-main">
+        <h1 class="login-main__title">로그인</h1>
+        <input class="login-main__id" placeholder="아이디" type="text" />
+        <input
+          class="login-main__password"
+          placeholder="비밀번호"
+          type="password"
+        />
+        <div class="login-main__column">
+          <a
+            class="login-main__log-in"
+            href="concerts.html"
+            th:href="@{/search}"
+            >로그인</a
+          >
+        </div>
+        <div class="login-main__column">
+          <a class="login-main__back" href="login.html">뒤로가기</a>
+          <a class="login-main__sign-in" href="signin.html">회원가입</a>
+        </div>
+      </span>
+    </main>
+
+    <script
+      src="https://kit.fontawesome.com/df25e700c0.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

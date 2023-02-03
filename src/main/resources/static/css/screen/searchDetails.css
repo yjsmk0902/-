@@ -49,7 +49,7 @@
   padding: 5px;
   top: 15px;
   right: 15px;
-  color: #eebc11;
+  color: var(--yellow);
   opacity: 0.5;
   position: absolute;
 }

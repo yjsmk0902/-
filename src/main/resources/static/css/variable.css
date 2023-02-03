@@ -1,5 +1,6 @@
 :root {
   --main-color: #7052d0;
+  --yellow: #eebc11;
   --selector-border: 1px solid var(--main-color);
   --button-border: 2px solid var(--main-color);
 }
