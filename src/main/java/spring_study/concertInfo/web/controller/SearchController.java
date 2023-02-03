@@ -84,7 +84,7 @@ public class SearchController {
         ConcertDetailsResponseDTO info = concertService.findById(showId);
         log.info("info={}", info);
         model.addAttribute("info", info);
-        return "concertDetail";
+        return "searchDetails";
     }
 
 }

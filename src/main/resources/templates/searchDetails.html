@@ -7,13 +7,13 @@
     <link
       rel="shortcut icon"
       th:href="@{/img/SHOWGO/1.png}"
-      href="../static/img/SHOWGO/1.png"
+      href="../img/SHOWGO/1.png"
       type="image/x-icon"
     />
     <link
       rel="stylesheet"
       th:href="@{/css/style.css}"
-      href="../static/css/style.css"
+      href="../css/style.css"
     />
     <title>SHOWGO</title>
   </head>
@@ -21,64 +21,64 @@
     <header>
       <nav></nav>
     </header>
-    <main id="searchDetails-main">
+    <main id="searchDetails-main" th:object="${info}">
       <div class="details-card">
-        <img
-          class="details-card__img"
-          src="../static/img/SHOWGO/1.png"
-          alt=""
-        />
+        <div class="details-card__img">
+          <img src="../img/SHOWGO/1.png"  th:src="*{poster_URL}" alt="" />
+          <span><i class="fa-regular fa-star"></i></span>
+        </div>
         <div class="details-card__info">
-          <h1 class="details-card__info-title">공연 이름</h1>
+          <h1 class="details-card__info-title" th:text="*{showName}">공연 이름</h1>
           <div class="details-card__info-column">
             <span class="details-card__info-detail">공연 장소</span>
-            <span class="details-card__info-source">details</span>
+            <span class="details-card__info-source" th:text="*{place}">details</span>
           </div>
           <div class="details-card__info-column">
             <span class="details-card__info-detail">출연진들</span>
-            <span class="details-card__info-source">details</span>
+            <span class="details-card__info-source" th:text="*{actors}">details</span>
           </div>
           <div class="details-card__info-column">
             <span class="details-card__info-detail">제작진들</span>
-            <span class="details-card__info-source">details</span>
+            <span class="details-card__info-source" th:text="*{producers}">details</span>
           </div>
           <div class="details-card__info-column">
             <span class="details-card__info-detail">러닝타임</span>
-            <span class="details-card__info-source">details</span>
+            <span class="details-card__info-source" th:text="*{runtime}">details</span>
           </div>
           <div class="details-card__info-column">
             <span class="details-card__info-detail">이용연령</span>
-            <span class="details-card__info-source">details</span>
+            <span class="details-card__info-source" th:text="*{age}">details</span>
           </div>
           <div class="details-card__info-column">
             <span class="details-card__info-detail">제작사</span>
-            <span class="details-card__info-source">details</span>
+            <span class="details-card__info-source" th:text="*{production}">details</span>
           </div>
           <div class="details-card__info-column">
             <span class="details-card__info-detail">티켓가격</span>
-            <span class="details-card__info-source">details</span>
+            <span class="details-card__info-source" th:text="*{ticketPrice}">details</span>
           </div>
           <div class="details-card__info-column">
             <span class="details-card__info-detail">스토리</span>
-            <span class="details-card__info-source">details</span>
+            <span class="details-card__info-source" th:text="*{story}">details</span>
           </div>
           <div class="details-card__info-column">
             <span class="details-card__info-detail">공연상태</span>
-            <span class="details-card__info-source">details</span>
+            <span class="details-card__info-source" th:text="*{status}">details</span>
           </div>
           <div class="details-card__info-column">
             <span class="details-card__info-detail">오픈런</span>
-            <span class="details-card__info-source">details</span>
+            <span class="details-card__info-source" th:text="*{openRun}">details</span>
           </div>
           <div class="details-card__info-column">
             <span class="details-card__info-detail">공연요일</span>
-            <span class="details-card__info-source">details</span>
+            <span class="details-card__info-source" th:text="*{showtime}">details</span>
           </div>
         </div>
       </div>
       <div class="details-card__story-img">
-        <img src="../static/img/SHOWGO/1.png" alt="" />
-        <img src="../static/img/SHOWGO/1.png" alt="" />
+        <th:block th:each="image:*{introImg}">
+          <img src="../img/SHOWGO/1.png" th:src="${image}"/>
+        </th:block>
       </div>
     </main>
 
@@ -86,5 +86,6 @@
       src="https://kit.fontawesome.com/df25e700c0.js"
       crossorigin="anonymous"
     ></script>
+    <script src="../js/searchDetails.js"></script>
   </body>
 </html>

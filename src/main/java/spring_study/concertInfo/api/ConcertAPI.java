@@ -119,7 +119,6 @@ public class ConcertAPI {
         for (Element styurl : styurls) {
             styImg.add(styurl.getText());
         }
-        log.info("styImg={}", styImg);
         return new ConcertDetailsResponseDTO(
                 response.getChildText("mt20id"),
                 response.getChildText("mt10id"),
