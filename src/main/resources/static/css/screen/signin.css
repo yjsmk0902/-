@@ -1,4 +1,4 @@
-@keyframes loginForwardsBase {
+@keyframes signinForwardsBase {
   from {
     width: 50%;
   }
@@ -7,7 +7,7 @@
   }
 }
 
-@keyframes loginForwardsUp {
+@keyframes signinForwardsUp {
   from {
     opacity: 0;
     transform: translateY(50px);
@@ -17,7 +17,7 @@
   }
 }
 
-#login-body {
+#signin-body {
   background-image: url("../../img/index/3.jpg");
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@
   height: 100vh;
   margin: 0;
 }
-#login-main {
+#signin-main {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,24 +36,24 @@
   color: white;
   margin: 0;
   background-color: rgba(0, 0, 0, 0.8);
-  animation: loginForwardsBase 1s ease-in-out forwards;
+  animation: signinForwardsBase 1s ease-in-out forwards;
 }
 
-.login-main__title,
-.login-main__id,
-.login-main__password {
+.signin-main__title,
+.signin-main__id,
+.signin-main__password {
   opacity: 0;
-  animation: loginForwardsUp 1s 1s ease-in-out forwards;
+  animation: signinForwardsUp 1s 1s ease-in-out forwards;
 }
 
-.login-main__title {
+.signin-main__title {
   font-size: 45px;
   color: white;
   margin-bottom: 60px;
 }
 
-.login-main__id,
-.login-main__password {
+.signin-main__id,
+.signin-main__password {
   width: 50%;
   border-radius: 13px;
   border: none;
@@ -64,22 +64,22 @@
   color: black;
 }
 
-.login-main__id {
+.signin-main__id {
   margin-bottom: 13px;
 }
 
-.login-main__password {
+.signin-main__password {
   margin-bottom: 60px;
 }
 
-.login-main__column {
+.signin-main__column {
   margin-bottom: 30px;
   opacity: 0;
 
-  animation: loginForwardsUp 1.4s 1s ease-in-out forwards;
+  animation: signinForwardsUp 1.4s 1s ease-in-out forwards;
 }
 
-.login-main__log-in {
+.signin-main__log-in {
   text-decoration: none;
   font-size: 20px;
   font-weight: 600;
@@ -89,7 +89,7 @@
   color: white;
 }
 
-.login-main__column:last-child a {
+.signin-main__column:last-child a {
   text-decoration: none;
   font-size: 13px;
   font-weight: 400;
@@ -99,10 +99,10 @@
   margin: 0px 5px;
 }
 
-.login-main__back {
+.signin-main__back {
   background-color: rgba(0, 162, 79, 0.4);
 }
 
-.login-main__sign-in {
+.signin-main__sign-in {
   background-color: rgba(126, 249, 255, 0.4);
 }

@@ -24,28 +24,26 @@
     </header>
 
     <main id="index-main">
-      <span class="index-main">
-        <img
-          class="index-main__img"
-          th:src="@{img/SHOWGO/1.png}"
-          src="../img/SHOWGO/1.png"
-          alt=""
-        />
-        <h1 class="index-main__title">최애 배우의 공연을 한손에!</h1>
-        <p class="index-main__subtitle">
-          수많은 공연...공연 시간대마다 매번 달라지는 배우들...<br />내가
-          보고싶은 배우를 내가 원하는 시간에 볼 수 없을까?
-        </p>
-        <div class="index-main__column">
-          <a class="index-main__go" href="concerts.html" th:href="@{/search}"
-            >SHOW GO!</a
-          >
-        </div>
-        <div class="index-main__column">
-          <a class="index-main__log-in" href="login.html">로그인</a>
-          <a class="index-main__sign-in" href="signin.html">회원가입</a>
-        </div>
-      </span>
+      <img
+        class="index-main__img"
+        th:src="@{img/SHOWGO/1.png}"
+        src="../img/SHOWGO/1.png"
+        alt=""
+      />
+      <h1 class="index-main__title">최애 배우의 공연을 한손에!</h1>
+      <p class="index-main__subtitle">
+        수많은 공연...공연 시간대마다 매번 달라지는 배우들...<br />내가 보고싶은
+        배우를 내가 원하는 시간에 볼 수 없을까?
+      </p>
+      <div class="index-main__column">
+        <a class="index-main__go" href="search.html" th:href="@{/search}"
+          >SHOW GO!</a
+        >
+      </div>
+      <div class="index-main__column">
+        <a class="index-main__log-in" href="login.html">로그인</a>
+        <a class="index-main__sign-in" href="signin.html">회원가입</a>
+      </div>
     </main>
 
     <script
