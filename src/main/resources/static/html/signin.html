@@ -24,22 +24,26 @@
     </header>
 
     <main id="signin-main">
-      <h1 class="signin-main__title">로그인</h1>
+      <h1 class="signin-main__title">회원가입</h1>
       <input class="signin-main__id" placeholder="아이디" type="text" />
       <input
         class="signin-main__password"
         placeholder="비밀번호"
         type="password"
       />
-      <div class="signin-main__column">
-        <a class="signin-main__log-in" href="concerts.html" th:href="@{/search}"
-          >로그인</a
-        >
-      </div>
-      <div class="signin-main__column">
-        <a class="signin-main__back" href="signin.html">뒤로가기</a>
-        <a class="signin-main__sign-in" href="signin.html">회원가입</a>
-      </div>
+      <input
+        class="signin-main__password"
+        placeholder="비밀번호 확인"
+        type="password"
+      />
+      <form class="sign-form">
+        <div class="signin-main__column">
+          <a class="signin-main__log-in" href="search.html" th:href="@{/search}"
+            >회원가입</a
+          >
+          <a class="signin-main__back" href="signin.html">뒤로가기</a>
+        </div>
+      </form>
     </main>
 
     <script

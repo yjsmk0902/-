@@ -13,3 +13,8 @@
 
 /* DateRangePicker */
 @import url("https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css");
+
+body {
+  width: 100vw;
+  background-image: url("../img/index/3.jpg");
+}

@@ -1,9 +1,9 @@
 @keyframes signinForwardsBase {
   from {
-    width: 50%;
+    width: 0%;
   }
   to {
-    width: 30%;
+    width: 40%;
   }
 }
 
@@ -18,12 +18,10 @@
 }
 
 #signin-body {
-  background-image: url("../../img/index/3.jpg");
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100vw;
-  height: 100vh;
   margin: 0;
 }
 #signin-main {
@@ -31,10 +29,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 40%;
   height: 100%;
   color: white;
-  margin: 0;
   background-color: rgba(0, 0, 0, 0.8);
   animation: signinForwardsBase 1s ease-in-out forwards;
 }
@@ -59,50 +56,38 @@
   border: none;
   padding: 15px 20px;
   font-size: 20px;
-  z-index: 3;
   background-color: white;
   color: black;
 }
 
-.signin-main__id {
+#signin-main > input:not(:nth-child(4)) {
   margin-bottom: 13px;
 }
 
-.signin-main__password {
-  margin-bottom: 60px;
+.signin-main__password:nth-child(4) {
+  margin-bottom: 50px;
 }
 
 .signin-main__column {
-  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
   opacity: 0;
-
   animation: signinForwardsUp 1.4s 1s ease-in-out forwards;
 }
 
-.signin-main__log-in {
+.signin-main__log-in,
+.signin-main__back {
   text-decoration: none;
   font-size: 20px;
   font-weight: 600;
   padding: 10px 50px;
   border-radius: 10px;
+  color: white;
+}
+.signin-main__log-in {
   background-color: rgba(128, 128, 128, 0.4);
-  color: white;
+  margin-bottom: 10px;
 }
-
-.signin-main__column:last-child a {
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 400;
-  padding: 10px 20px;
-  border-radius: 10px;
-  color: white;
-  margin: 0px 5px;
-}
-
 .signin-main__back {
   background-color: rgba(0, 162, 79, 0.4);
-}
-
-.signin-main__sign-in {
-  background-color: rgba(126, 249, 255, 0.4);
 }

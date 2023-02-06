@@ -52,25 +52,10 @@ public class SearchController {
                               Model model) throws IOException, JDOMException {
 
         List<ConcertResponseDTO> result = concertService.findByKeywordAndDate(concertSearch, page);
-        List<ConcertResponseDTO> resultBlock1 = new ArrayList<>();
-        List<ConcertResponseDTO> resultBlock2 = new ArrayList<>();
-        List<ConcertResponseDTO> resultBlock3 = new ArrayList<>();
-
-        for (int i = 0; i < result.size() && i < 4; i++) {
-            resultBlock1.add(result.get(i));
-        }
-        for (int i = 4; i < result.size() && i < 8; i++) {
-            resultBlock2.add(result.get(i));
-        }
-        for (int i = 8; i < result.size() && i < 12; i++) {
-            resultBlock3.add(result.get(i));
-        }
 
         boolean resultEmpty = result.isEmpty();
 
-        model.addAttribute("concertBlock1", resultBlock1);
-        model.addAttribute("concertBlock2", resultBlock2);
-        model.addAttribute("concertBlock3", resultBlock3);
+        model.addAttribute("shows",result);
         model.addAttribute("resultEmpty", resultEmpty);
         model.addAttribute("page", page);
 

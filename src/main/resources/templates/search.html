@@ -23,76 +23,43 @@
     </header>
 
     <main id="search-main">
-      <form id="search-form" th:action="@{/search/list(page=${param.page})}"
-      th:object="${concertSearch}" method="get">
+      <form
+        id="search-form"
+        th:action="@{/search/list(page=${param.page})}"
+        th:object="${concertSearch}"
+        method="get"
+      >
         <!--Page Value-->
-        <input type="hidden" name="page" value="1">
+        <input type="hidden" name="page" value="1" />
 
         <!-- GenreType -->
         <div id="genreType" class="radio-selector">
           <th:block th:each="type: ${genreTypes}">
             <label>
-              <input type="radio" name="genreType"
-              th:field="*{genreCond}" th:value="${type.name()}"/>
+              <input
+                type="radio"
+                name="genreType"
+                th:field="*{genreCond}"
+                th:value="${type.name()}"
+              />
               <span th:text="${type.description}">타입</span>
             </label>
           </th:block>
-<!--          <label>-->
-<!--            <input type="radio" name="genreType" checked />-->
-<!--            <span>타입</span>-->
-<!--          </label>-->
-<!--          <label>-->
-<!--            <input type="radio" name="genreType" />-->
-<!--            <span>타입</span>-->
-<!--          </label>-->
-<!--          <label>-->
-<!--            <input type="radio" name="genreType" />-->
-<!--            <span>타입</span>-->
-<!--          </label>-->
-<!--          <label>-->
-<!--            <input type="radio" name="genreType" />-->
-<!--            <span>타입</span>-->
-<!--          </label>-->
-<!--          <label>-->
-<!--            <input type="radio" name="genreType" />-->
-<!--            <span>타입</span>-->
-<!--          </label>-->
-<!--          <label>-->
-<!--            <input type="radio" name="genreType" />-->
-<!--            <span>타입</span>-->
-<!--          </label>-->
-<!--          <label>-->
-<!--            <input type="radio" name="genreType" />-->
-<!--            <span>타입</span>-->
-<!--          </label>-->
-<!--          <label>-->
-<!--            <input type="radio" name="genreType" />-->
-<!--            <span>타입</span>-->
-<!--          </label>-->
         </div>
 
         <!-- StatusType -->
         <div id="statusType" class="radio-selector">
           <th:block th:each="type : ${statusTypes}">
             <label>
-              <input type="radio" name="statusType"
-                     th:field="*{statusCond}" th:value="${type.name()}"/>
+              <input
+                type="radio"
+                name="statusType"
+                th:field="*{statusCond}"
+                th:value="${type.name()}"
+              />
               <span th:text="${type.description}">타입</span>
             </label>
           </th:block>
-
-<!--          <label>-->
-<!--            <input type="radio" name="statusType" checked />-->
-<!--            <span>타입</span>-->
-<!--          </label>-->
-<!--          <label>-->
-<!--            <input type="radio" name="statusType" />-->
-<!--            <span>타입</span>-->
-<!--          </label>-->
-<!--          <label>-->
-<!--            <input type="radio" name="statusType" />-->
-<!--            <span>타입</span>-->
-<!--          </label>-->
         </div>
 
         <!-- 공연 검색 창 -->
@@ -128,420 +95,89 @@
       <!-- 공연 검색 리스트 -->
       <p th:if="${resultEmpty}">
         <script th:if="${page!=1}" type="text/javascript">
-          alert("마지막 페이지입니다")
+          alert("마지막 페이지입니다");
           history.go(-1);
         </script>
         검색 결과가 없습니다
       </p>
       <div class="search-info">
-        <th:block th:each="concert : ${concertBlock1}">
+        <th:block th:each="concert : ${shows}">
           <div class="search-info__card">
             <img
-                    class="search-info__card-image"
-                    src="../static/img/SHOWGO/2.png"
-                    alt=""
-                    th:src="${concert.getPoster_URL()}"
+              class="search-info__card-image"
+              src="../static/img/SHOWGO/2.png"
+              alt=""
+              th:src="${concert.getPoster_URL()}"
             />
             <span class="search-info__card-name">
-            <h3 th:text="${concert.getTitle()}">
-              공연 이름</h3>
-          </span>
+              <h3 th:text="${concert.getTitle()}">공연 이름</h3>
+            </span>
             <span class="search-info__card-date">
-            <span class="search-info__card-text"
-                  th:text="${concert.getPlace()}">
-              공연 장소</span>
-          </span>
+              <span
+                class="search-info__card-text"
+                th:text="${concert.getPlace()}"
+              >
+                공연 장소</span
+              >
+            </span>
             <span class="search-info__card-status">
-            <span class="search-info__card-text"
-                  th:text="|${concert.getStDate()}   -   ${concert.getEdDate}|">
-              공연 날짜</span>
-          </span>
+              <span
+                class="search-info__card-text"
+                th:text="|${concert.getStDate()}   -   ${concert.getEdDate}|"
+              >
+                공연 날짜</span
+              >
+            </span>
             <span class="search-info__card-genre">
-            <span class="search-info__card-text"
-                  th:text="${concert.getStatus()}">
-              공연 상태</span>
-          </span>
+              <span
+                class="search-info__card-text"
+                th:text="${concert.getStatus()}"
+              >
+                공연 상태</span
+              >
+            </span>
             <span class="search-info__card-place">
-            <span class="search-info__card-text"
-                  th:text="${concert.getGenre()}">
-              공연 장르</span>
-          </span>
+              <span
+                class="search-info__card-text"
+                th:text="${concert.getGenre()}"
+              >
+                공연 장르</span
+              >
+            </span>
             <span class="search-info__card-link">
-              <a href="#" th:href="@{info(show=${concert.getId()})}">보러가기</a>
+              <a href="#" th:href="@{info(show=${concert.getId()})}"
+                >보러가기</a
+              >
             </span>
           </div>
         </th:block>
-<!--        <div class="search-info__card">-->
-<!--          <img-->
-<!--            class="search-info__card-image"-->
-<!--            src="../static/img/SHOWGO/2.png"-->
-<!--            alt=""-->
-<!--          />-->
-<!--          <span class="search-info__card-name">-->
-<!--            <h3>공연 이름</h3>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-date">-->
-<!--            <span class="search-info__card-text">공연 장소</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-status">-->
-<!--            <span class="search-info__card-text">공연 날짜</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-genre">-->
-<!--            <span class="search-info__card-text">공연 상태</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-place">-->
-<!--            <span class="search-info__card-text">공연 장르</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-link"><a href="#">보러가기</a></span>-->
-<!--        </div>-->
-<!--        <div class="search-info__card">-->
-<!--          <img-->
-<!--            class="search-info__card-image"-->
-<!--            src="../static/img/SHOWGO/2.png"-->
-<!--            alt=""-->
-<!--          />-->
-<!--          <span class="search-info__card-name">-->
-<!--            <h3>공연 이름</h3>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-date">-->
-<!--            <span class="search-info__card-text">공연 장소</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-status">-->
-<!--            <span class="search-info__card-text">공연 날짜</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-genre">-->
-<!--            <span class="search-info__card-text">공연 상태</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-place">-->
-<!--            <span class="search-info__card-text">공연 장르</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-link"><a href="#">보러가기</a></span>-->
-<!--        </div>-->
-<!--        <div class="search-info__card">-->
-<!--          <img-->
-<!--            class="search-info__card-image"-->
-<!--            src="../static/img/SHOWGO/2.png"-->
-<!--            alt=""-->
-<!--          />-->
-<!--          <span class="search-info__card-name">-->
-<!--            <h3>공연 이름</h3>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-date">-->
-<!--            <span class="search-info__card-text">공연 장소</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-status">-->
-<!--            <span class="search-info__card-text">공연 날짜</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-genre">-->
-<!--            <span class="search-info__card-text">공연 상태</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-place">-->
-<!--            <span class="search-info__card-text">공연 장르</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-link"><a href="#">보러가기</a></span>-->
-<!--        </div>-->
-<!--        <div class="search-info__card">-->
-<!--          <img-->
-<!--            class="search-info__card-image"-->
-<!--            src="../static/img/SHOWGO/2.png"-->
-<!--            alt=""-->
-<!--          />-->
-<!--          <span class="search-info__card-name">-->
-<!--            <h3>공연 이름</h3>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-date">-->
-<!--            <span class="search-info__card-text">공연 장소</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-status">-->
-<!--            <span class="search-info__card-text">공연 날짜</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-genre">-->
-<!--            <span class="search-info__card-text">공연 상태</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-place">-->
-<!--            <span class="search-info__card-text">공연 장르</span>-->
-<!--          </span>-->
-<!--          <span class="search-info__card-link"><a href="#">보러가기</a></span>-->
-<!--        </div>-->
-      </div>
-      <div class="search-info">
-        <th:block th:each="concert : ${concertBlock2}">
-          <div class="search-info__card">
-            <img
-                    class="search-info__card-image"
-                    src="../static/img/SHOWGO/2.png"
-                    alt=""
-                    th:src="${concert.getPoster_URL()}"
-            />
-            <span class="search-info__card-name">
-            <h3 th:text="${concert.getTitle()}">
-              공연 이름</h3>
-          </span>
-            <span class="search-info__card-date">
-            <span class="search-info__card-text"
-                  th:text="${concert.getPlace()}">
-              공연 장소</span>
-          </span>
-            <span class="search-info__card-status">
-            <span class="search-info__card-text"
-                  th:text="|${concert.getStDate()}   -   ${concert.getEdDate}|">
-              공연 날짜</span>
-          </span>
-            <span class="search-info__card-genre">
-            <span class="search-info__card-text"
-                  th:text="${concert.getStatus()}">
-              공연 상태</span>
-          </span>
-            <span class="search-info__card-place">
-            <span class="search-info__card-text"
-                  th:text="${concert.getGenre()}">
-              공연 장르</span>
-          </span>
-            <span class="search-info__card-link">
-              <a href="#" th:href="@{info(show=${concert.getId()})}">보러가기</a>
-            </span>
-          </div>
-        </th:block>
-        <!--        <div class="search-info__card">-->
-        <!--          <img-->
-        <!--            class="search-info__card-image"-->
-        <!--            src="../static/img/SHOWGO/2.png"-->
-        <!--            alt=""-->
-        <!--          />-->
-        <!--          <span class="search-info__card-name">-->
-        <!--            <h3>공연 이름</h3>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-date">-->
-        <!--            <span class="search-info__card-text">공연 장소</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-status">-->
-        <!--            <span class="search-info__card-text">공연 날짜</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-genre">-->
-        <!--            <span class="search-info__card-text">공연 상태</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-place">-->
-        <!--            <span class="search-info__card-text">공연 장르</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-link"><a href="#">보러가기</a></span>-->
-        <!--        </div>-->
-        <!--        <div class="search-info__card">-->
-        <!--          <img-->
-        <!--            class="search-info__card-image"-->
-        <!--            src="../static/img/SHOWGO/2.png"-->
-        <!--            alt=""-->
-        <!--          />-->
-        <!--          <span class="search-info__card-name">-->
-        <!--            <h3>공연 이름</h3>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-date">-->
-        <!--            <span class="search-info__card-text">공연 장소</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-status">-->
-        <!--            <span class="search-info__card-text">공연 날짜</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-genre">-->
-        <!--            <span class="search-info__card-text">공연 상태</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-place">-->
-        <!--            <span class="search-info__card-text">공연 장르</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-link"><a href="#">보러가기</a></span>-->
-        <!--        </div>-->
-        <!--        <div class="search-info__card">-->
-        <!--          <img-->
-        <!--            class="search-info__card-image"-->
-        <!--            src="../static/img/SHOWGO/2.png"-->
-        <!--            alt=""-->
-        <!--          />-->
-        <!--          <span class="search-info__card-name">-->
-        <!--            <h3>공연 이름</h3>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-date">-->
-        <!--            <span class="search-info__card-text">공연 장소</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-status">-->
-        <!--            <span class="search-info__card-text">공연 날짜</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-genre">-->
-        <!--            <span class="search-info__card-text">공연 상태</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-place">-->
-        <!--            <span class="search-info__card-text">공연 장르</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-link"><a href="#">보러가기</a></span>-->
-        <!--        </div>-->
-        <!--        <div class="search-info__card">-->
-        <!--          <img-->
-        <!--            class="search-info__card-image"-->
-        <!--            src="../static/img/SHOWGO/2.png"-->
-        <!--            alt=""-->
-        <!--          />-->
-        <!--          <span class="search-info__card-name">-->
-        <!--            <h3>공연 이름</h3>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-date">-->
-        <!--            <span class="search-info__card-text">공연 장소</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-status">-->
-        <!--            <span class="search-info__card-text">공연 날짜</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-genre">-->
-        <!--            <span class="search-info__card-text">공연 상태</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-place">-->
-        <!--            <span class="search-info__card-text">공연 장르</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-link"><a href="#">보러가기</a></span>-->
-        <!--        </div>-->
-      </div>
-      <div class="search-info">
-        <th:block th:each="concert : ${concertBlock3}">
-          <div class="search-info__card">
-            <img
-                    class="search-info__card-image"
-                    src="../static/img/SHOWGO/2.png"
-                    alt=""
-                    th:src="${concert.getPoster_URL()}"
-            />
-            <span class="search-info__card-name">
-            <h3 th:text="${concert.getTitle()}">
-              공연 이름</h3>
-          </span>
-            <span class="search-info__card-date">
-            <span class="search-info__card-text"
-                  th:text="${concert.getPlace()}">
-              공연 장소</span>
-          </span>
-            <span class="search-info__card-status">
-            <span class="search-info__card-text"
-                  th:text="|${concert.getStDate()}   -   ${concert.getEdDate}|">
-              공연 날짜</span>
-          </span>
-            <span class="search-info__card-genre">
-            <span class="search-info__card-text"
-                  th:text="${concert.getStatus()}">
-              공연 상태</span>
-          </span>
-            <span class="search-info__card-place">
-            <span class="search-info__card-text"
-                  th:text="${concert.getGenre()}">
-              공연 장르</span>
-          </span>
-            <span class="search-info__card-link">
-              <a href="#" th:href="@{info(show=${concert.getId()})}">보러가기</a>
-            </span>
-          </div>
-        </th:block>
-        <!--        <div class="search-info__card">-->
-        <!--          <img-->
-        <!--            class="search-info__card-image"-->
-        <!--            src="../static/img/SHOWGO/2.png"-->
-        <!--            alt=""-->
-        <!--          />-->
-        <!--          <span class="search-info__card-name">-->
-        <!--            <h3>공연 이름</h3>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-date">-->
-        <!--            <span class="search-info__card-text">공연 장소</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-status">-->
-        <!--            <span class="search-info__card-text">공연 날짜</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-genre">-->
-        <!--            <span class="search-info__card-text">공연 상태</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-place">-->
-        <!--            <span class="search-info__card-text">공연 장르</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-link"><a href="#">보러가기</a></span>-->
-        <!--        </div>-->
-        <!--        <div class="search-info__card">-->
-        <!--          <img-->
-        <!--            class="search-info__card-image"-->
-        <!--            src="../static/img/SHOWGO/2.png"-->
-        <!--            alt=""-->
-        <!--          />-->
-        <!--          <span class="search-info__card-name">-->
-        <!--            <h3>공연 이름</h3>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-date">-->
-        <!--            <span class="search-info__card-text">공연 장소</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-status">-->
-        <!--            <span class="search-info__card-text">공연 날짜</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-genre">-->
-        <!--            <span class="search-info__card-text">공연 상태</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-place">-->
-        <!--            <span class="search-info__card-text">공연 장르</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-link"><a href="#">보러가기</a></span>-->
-        <!--        </div>-->
-        <!--        <div class="search-info__card">-->
-        <!--          <img-->
-        <!--            class="search-info__card-image"-->
-        <!--            src="../static/img/SHOWGO/2.png"-->
-        <!--            alt=""-->
-        <!--          />-->
-        <!--          <span class="search-info__card-name">-->
-        <!--            <h3>공연 이름</h3>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-date">-->
-        <!--            <span class="search-info__card-text">공연 장소</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-status">-->
-        <!--            <span class="search-info__card-text">공연 날짜</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-genre">-->
-        <!--            <span class="search-info__card-text">공연 상태</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-place">-->
-        <!--            <span class="search-info__card-text">공연 장르</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-link"><a href="#">보러가기</a></span>-->
-        <!--        </div>-->
-        <!--        <div class="search-info__card">-->
-        <!--          <img-->
-        <!--            class="search-info__card-image"-->
-        <!--            src="../static/img/SHOWGO/2.png"-->
-        <!--            alt=""-->
-        <!--          />-->
-        <!--          <span class="search-info__card-name">-->
-        <!--            <h3>공연 이름</h3>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-date">-->
-        <!--            <span class="search-info__card-text">공연 장소</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-status">-->
-        <!--            <span class="search-info__card-text">공연 날짜</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-genre">-->
-        <!--            <span class="search-info__card-text">공연 상태</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-place">-->
-        <!--            <span class="search-info__card-text">공연 장르</span>-->
-        <!--          </span>-->
-        <!--          <span class="search-info__card-link"><a href="#">보러가기</a></span>-->
-        <!--        </div>-->
       </div>
 
       <!-- 페이징 -->
-      <div id="search-page" th:if="${concertBlock1!=null}">
+      <div id="search-page" th:if="${shows!=null}">
         <th:block th:if="${!resultEmpty}">
           <th:block th:object="${concertSearch}">
-            <a class="search-page__prev" href="#" type="button"
-               th:if="${page != 1}"
-               th:href="@{/search/list(page=${page}-1, statusCond=*{statusCond.name()},
+            <a
+              class="search-page__prev"
+              href="#"
+              type="button"
+              th:if="${page != 1}"
+              th:href="@{/search/list(page=${page}-1, statusCond=*{statusCond.name()},
                            genreCond=*{genreCond.name()}, showPlace=*{showPlace},
-                           showName=*{showName},startEndDate=*{startEndDate})}">
-              이전 페이지</a>
-            <a class="search-page__next" href="#" type="button"
-               th:href="@{/search/list(page=${page}+1, statusCond=*{statusCond.name()},
+                           showName=*{showName},startEndDate=*{startEndDate})}"
+            >
+              이전 페이지</a
+            >
+            <a
+              class="search-page__next"
+              href="#"
+              type="button"
+              th:href="@{/search/list(page=${page}+1, statusCond=*{statusCond.name()},
                            genreCond=*{genreCond.name()}, showPlace=*{showPlace},
-                           showName=*{showName},startEndDate=*{startEndDate})}">
-              다음 페이지</a>
+                           showName=*{showName},startEndDate=*{startEndDate})}"
+            >
+              다음 페이지</a
+            >
           </th:block>
         </th:block>
       </div>

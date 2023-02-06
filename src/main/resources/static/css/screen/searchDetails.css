@@ -25,6 +25,7 @@
   flex-direction: row;
   width: 90%;
   border: 4px solid var(--main-color);
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 15px;
   margin-bottom: 100px;
 }
@@ -102,12 +103,17 @@
 }
 
 .details-card__story-img {
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  width: 70%;
+  align-items: center;
+  width: 80%;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 30px;
 }
 
 .details-card__story-img img {
-  width: 100%;
+  width: 90%;
   margin-bottom: 10px;
 }
