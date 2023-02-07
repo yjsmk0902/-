@@ -23,7 +23,7 @@
       <nav></nav>
     </header>
 
-    <main id="signin-main">
+    <form id="signin-main">
       <h1 class="signin-main__title">회원가입</h1>
       <input class="signin-main__id" placeholder="아이디" type="text" />
       <input
@@ -36,15 +36,13 @@
         placeholder="비밀번호 확인"
         type="password"
       />
-      <form class="sign-form">
-        <div class="signin-main__column">
-          <a class="signin-main__log-in" href="search.html" th:href="@{/search}"
-            >회원가입</a
-          >
-          <a class="signin-main__back" href="signin.html">뒤로가기</a>
-        </div>
-      </form>
-    </main>
+      <div class="signin-main__column">
+        <button class="signin-main__log-in" type="submit" th:href="@{/search}">
+          회원가입
+        </button>
+        <a class="signin-main__back" onclick="history.back()">뒤로가기</a>
+      </div>
+    </form>
 
     <script
       src="https://kit.fontawesome.com/df25e700c0.js"
