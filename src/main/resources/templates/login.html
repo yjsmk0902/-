@@ -32,13 +32,13 @@
         type="password"
       />
       <div class="login-main__column">
-        <button class="login-main__log-in" type="submit" href="search.html">
+        <button class="login-main__log-in" type="submit" href="search.html" th:href="@{/search}">
           로그인
         </button>
       </div>
       <div class="login-main__column">
         <a class="login-main__back" onclick="history.back()">뒤로가기</a>
-        <a class="login-main__sign-in" href="signin.html">회원가입</a>
+        <a class="login-main__sign-in" href="signin.html" th:href="@{/members/signIn}">회원가입</a>
       </div>
     </form>
 
