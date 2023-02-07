@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import spring_study.concertInfo.domain.dto.MemberDTO;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -31,6 +32,10 @@ public class Member implements UserDetails {
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
+    public Member(MemberDTO memberDTO) {
+        this.memberId = memberDTO.getMemberId();
+        this.password = memberDTO.getPassword();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import spring_study.concertInfo.domain.dto.MemberDTO;
+import spring_study.concertInfo.domain.entity.Member;
 import spring_study.concertInfo.jwt.JwtTokenProvider;
 import spring_study.concertInfo.jwt.TokenInfo;
 import spring_study.concertInfo.repository.MemberRepository;
@@ -32,5 +34,11 @@ public class MemberService {
         //3. 인증 정보를 기반으로 JWT 토큰 생성
         TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
         return tokenInfo;
+    }
+
+    @Transactional
+    public void signIn(MemberDTO memberInfo) {
+        Member member = new Member(memberInfo);
+        memberRepository.save(member);
     }
 }
